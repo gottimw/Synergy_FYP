@@ -3,6 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="lib" path="D:/programowanie/java/Synergy_FYP/xom-1.2.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="D:/programowanie/java/Synergy_FYP/xom-1.2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Gottimw/Desktop/sax2r2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

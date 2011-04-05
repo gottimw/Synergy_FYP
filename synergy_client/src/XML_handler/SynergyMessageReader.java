@@ -25,19 +25,37 @@ public class SynergyMessageReader {
 		doc = xML_reader.getXMLDocument();
 	}
 	
-	public Boolean parseHandshake(String originalXML){
+	/**
+	 * returns true if login was successful
+	 * @param originalXML
+	 * @return
+	 */
+	public Boolean parseHandshake_Res(String xml_message){
 		
-		setVariables(originalXML);
+		String responce = getTagValue("Success", xml_message);
 		
-		Element message = (doc.getRootElement()).getFirstChildElement("SynergyMessage");
-		String username = (message.getFirstChildElement("Username")).getValue();
-		String password = (message.getFirstChildElement("password")).getValue();
-		
-		return null;
-		
+		if(responce.compareToIgnoreCase("true") == 0)
+			return true;
+		else
+			return false;	
 	}
 
-	
+	private String getTagValue(String tag, String msg){
+		
+		String stTag = "<"+tag+">";
+		String endTag = "</"+tag+">";
+		
+		int start = msg.indexOf(stTag);
+		start += stTag.length();
+		
+		int end = msg.indexOf(endTag);
+		
+		if(end == -1)
+			return null;
+		
+		return (String) msg.subSequence(start, end);
+		
+	}
 	
 	
 	

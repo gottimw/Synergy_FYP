@@ -2,10 +2,14 @@ package XML_handler;
 
 import java.io.IOException;
 
-import nu.xom.Builder;
-import nu.xom.Document;
-import nu.xom.ParsingException;
-import nu.xom.ValidityException;
+import org.xml.sax.*;
+import org.xml.sax.helpers.*;
+
+
+
+
+
+import nu.xom.*;
 
 public class XML_reader {
 
@@ -13,8 +17,13 @@ public class XML_reader {
     Builder builder;
 	
 	public XML_reader(String xMLmessage){
+
+
+      	builder = new Builder();
+
+			   
+
 		
-		builder = new Builder();
         
 		try {
 			doc = builder.build(xMLmessage, null);

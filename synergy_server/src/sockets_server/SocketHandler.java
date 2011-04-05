@@ -83,12 +83,12 @@ public class SocketHandler{
 	public void teardownSocket(){
 		
 		 try {
-			clientSocket.close();
-			serverSocket.close();
-		    is.close(); 
-		    os.close();
-		    ois.close();
-		    oos.close();
+			 ois.close();
+			 oos.close();
+			 is.close(); 
+			 os.close();
+			 clientSocket.close();
+			 serverSocket.close();
 		} catch (IOException e) {
 			System.err.println(
             		Thread.currentThread().getStackTrace()[2].getMethodName() +

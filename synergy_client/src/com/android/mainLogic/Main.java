@@ -4,10 +4,14 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import nu.xom.Document;
+
 import com.android.activities.*;
 
 import XML_handler.MessageType;
 import XML_handler.SynergyMessageCreator;
+import XML_handler.SynergyMessageReader;
+import XML_handler.XML_reader;
 import aaa.Aaa;
 import android.app.Activity;
 import android.content.Intent;

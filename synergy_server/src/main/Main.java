@@ -25,16 +25,24 @@ public class Main {
 		
 		while(true){
 			
+			socket_handler = null;
+			msgCreator = null;
+			msgReader = null;
+			
+			incomingMessage = null;
+			outgoingMessage = null;
+						
 			int port = 10101;
+			socketOpen = true;
 			
 			InetAddress thisIp = InetAddress.getLocalHost();
 		    System.out.println("IP:"+thisIp.getHostAddress());
 		    System.out.println("port:"+port);
-			socket_handler = new SocketHandler(port);
-			
-//*		
+		    
+		    socket_handler = new SocketHandler(port);
+
 			//socket_handler.acceptConnection();
-			System.out.print("Waiting for a client");
+			System.out.println("Waiting for a client");
 			socket_handler.acceptConnection();
 			
 			//Open IO streams for socket communication
@@ -63,73 +71,25 @@ public class Main {
 					System.out.println("Login Success");
 				}else{
 					System.out.println("Login Fail - termination of socket");
-					socket_handler.teardownSocket();
-					socketOpen = false;
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 					break;
 				}
 				
-	/*
-				//Create message
-				msgCreator = new SynergyMessageCreator(MessageType.LOGIN);
-				
-				//Send Message created above
-				socket_handler.sendObject(msgCreator.getReadyXML_Messsage());
-				
-				//Receive Login information
-				 incomingMessage = (String) socket_handler.receiveObject();
-	*/			
-				
+				socketOpen = false;
 			}
+			
+			//clean up
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			socket_handler.teardownSocket();
 		}
-//*/	
-		//send login request
-//		msgCreator = new SynergyMessageCreator(MessageType.LOGIN);
-		//System.out.println(msgCreator.getReadyXML_Messsage());
-		
-		//receive login info
-		 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-/*
-		XML_constructor xmlMsg = new XML_constructor();
-		xmlMsg.insertTagToMessage("test", "testValue");
-		xmlMsg.insertTagToMessage("test2", "testValue2");
-		xmlMsg.insertTagWithAttributeToMessage("Test3", "testval3", "attr1", "testattr1");
-		xmlMsg.insertTagWithAttributeToMessage("Test4", "testval4", "attr2", "testattr2");
-		System.out.println(xmlMsg.getXMLDoc());
-		xmlMsg._debug_getFormatedXMLDoc();
-		
-		
-		
-		InetAddress thisIp = InetAddress.getLocalHost();
-	    System.out.println("IP:"+thisIp.getHostAddress());
-
-		
-		Socket_handler socket_handler = null;
-		//DummyClass dummyOutgoing = null, dummyIncoming = null;
-		
-		socket_handler = new Socket_handler(10101);
-		socket_handler.acceptConnection();
-		socket_handler.setupIOStreams();
-		Object obj = socket_handler.receiveObject();
-		//System.out.println( (String) socket_handler.receiveObject() );
-		socket_handler.sendObject((Object) "Fuck off john");
-		if(obj != null){
-			System.out.println("received something");
-		}else{
-			System.out.println("received nothing ;(");
-		}
-//*/		
 	}
 
 }
