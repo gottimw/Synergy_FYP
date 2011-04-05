@@ -6,9 +6,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
 import java.io.OutputStream;
-import java.io.StreamCorruptedException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketPermission;
 import java.net.UnknownHostException;
 
 public class ObjectReceiveControler {
@@ -31,32 +31,38 @@ public class ObjectReceiveControler {
 	}
 	
 	public ObjectReceiveControler(){
-		socketIp = "10.150.9.30";
+		socketIp = "10.150.8.115";
 		socketPort = 10101;
 		setUpSocket();	
 	}
 	
 	private void setUpSocket(){
+		
+		
+		
+		is = null;
+		os = null;
+		ois = null;
+		oos = null;
+
+		
 		clientSocket = null;
 		try {
 			//find server
 			serverAddress = InetAddress.getByName(socketIp);
 			
 			//connect to the server socket
-			Socket socket = new Socket(serverAddress, socketPort);
+			Socket socket = new Socket("10.150.8.115", socketPort);
+			
 			System.out.println("client socket established"); 
 			
-            //is = clientSocket.getInputStream();
-            //os = clientSocket.getOutputStream();
+			
+			
             System.out.println("Input Output Streams opened"); 
-            
+            System.out.println("Input Output Object Streams opened");
             oos = new ObjectOutputStream(socket.getOutputStream());
             ois = new ObjectInputStream(socket.getInputStream());
-            
-            //oos = new ObjectOutputStream(os);
-            //ois = new ObjectInputStream(is);
-            System.out.println("Input Output Object Streams opened");          
-            
+        
         }catch (UnknownHostException e){
             System.err.println("Don't know about host: "+socketIp);
             System.exit(1);

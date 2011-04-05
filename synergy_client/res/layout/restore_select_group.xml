@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+    <TextView 
+    	android:layout_height="wrap_content"
+    	android:id="@+id/backup_main_selectContacts"
+    	android:text="Select Contacts That You Wish To Backup:"
+    	android:layout_width="wrap_content">
+    </TextView>
+    
+    <ScrollView 
+    	android:id="@+id/ScrollView01"
+ 		android:layout_width="fill_parent"
+		android:layout_height="500px">
+    
+    	<TextView 
+    		android:text="none so far"
+    		android:id="@+id/LogDump"
+    		android:layout_width="wrap_content"
+    		android:layout_height="wrap_content">
+    	</TextView>
+    	
+    </ScrollView>
+    
+</LinearLayout>

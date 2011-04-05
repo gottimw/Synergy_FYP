@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+    <TextView
+    	android:id="@+id/backup_main_selectContacts"
+    	android:text="Select Contacts That You Wish Restore:"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	>
+    </TextView>
+    
+    <ScrollView 
+    	android:id="@+id/ScrollView01"
+ 		android:layout_width="fill_parent"
+		android:layout_height="300px"
+		android:layout_weight="50">
+        <LinearLayout
+	    	android:orientation="vertical"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent">
+			
+			<!-- first contact container -->
+			<LinearLayout
+		    	android:orientation="horizontal"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="top"
+				android:background="#9CDCFF"
+				android:layout_marginBottom="10px">
+			
+				<!-- first contact details box -->
+				<LinearLayout
+			    	android:orientation="vertical"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="20">
+				
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="Firstname example"
+						android:id="@+id/name00">
+					</TextView>
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="Surname Example"
+						android:id="@+id/surname00">
+					</TextView>
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="Mobile no"
+						android:id="@+id/mobile00">
+					</TextView>
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="Home number"
+						android:id="@+id/home00">
+					</TextView>
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="email"
+						android:id="@+id/email00">
+					</TextView>
+				
+				</LinearLayout>
+				<!-- first contact tick box -->
+				<CheckBox
+					android:checked="true"
+					android:layout_height="wrap_content"
+					android:layout_width="wrap_content"
+					android:layout_weight="1"
+					
+					>
+				</CheckBox>
+				
+			</LinearLayout>
+			
+			
+			
+			<LinearLayout
+		    	android:orientation="horizontal"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="top"
+				android:background="#9CDCFF"
+				android:layout_marginBottom="10px">
+			
+				<!-- first contact details box -->
+				<LinearLayout
+			    	android:orientation="vertical"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="20">
+				
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="Firstname example"
+						android:id="@+id/name00">
+					</TextView>
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="Surname Example"
+						android:id="@+id/surname00">
+					</TextView>
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="Mobile no"
+						android:id="@+id/mobile00">
+					</TextView>
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="Home number"
+						android:id="@+id/home00">
+					</TextView>
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="email"
+						android:id="@+id/email00">
+					</TextView>
+				
+				</LinearLayout>
+				<!-- first contact tick box -->
+				<CheckBox
+					android:checked="true"
+					android:layout_height="wrap_content"
+					android:layout_width="wrap_content"
+					android:layout_weight="1"
+					
+					>
+				</CheckBox>
+				
+			</LinearLayout>
+			
+			
+			
+			
+			<LinearLayout
+		    	android:orientation="horizontal"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="top"
+				android:background="#9CDCFF"
+				android:layout_marginBottom="10px">
+			
+				<!-- first contact details box -->
+				<LinearLayout
+			    	android:orientation="vertical"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="20">
+				
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="Firstname example"
+						android:id="@+id/name00">
+					</TextView>
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="Surname Example"
+						android:id="@+id/surname00">
+					</TextView>
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="Mobile no"
+						android:id="@+id/mobile00">
+					</TextView>
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="Home number"
+						android:id="@+id/home00">
+					</TextView>
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="email"
+						android:id="@+id/email00">
+					</TextView>
+				
+				</LinearLayout>
+				<!-- first contact tick box -->
+				<CheckBox
+					android:checked="true"
+					android:layout_height="wrap_content"
+					android:layout_width="wrap_content"
+					android:layout_weight="1"
+					
+					>
+				</CheckBox>
+				
+			</LinearLayout>
+			
+			
+			
+			
+			<LinearLayout
+		    	android:orientation="horizontal"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="top"
+				android:background="#9CDCFF"
+				android:layout_marginBottom="10px">
+			
+				<!-- first contact details box -->
+				<LinearLayout
+			    	android:orientation="vertical"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_weight="20">
+				
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="Firstname example"
+						android:id="@+id/name00">
+					</TextView>
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="Surname Example"
+						android:id="@+id/surname00">
+					</TextView>
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="Mobile no"
+						android:id="@+id/mobile00">
+					</TextView>
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="Home number"
+						android:id="@+id/home00">
+					</TextView>
+					<TextView
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:text="email"
+						android:id="@+id/email00">
+					</TextView>
+				
+				</LinearLayout>
+				<!-- first contact tick box -->
+				<CheckBox
+					android:checked="true"
+					android:layout_height="wrap_content"
+					android:layout_width="wrap_content"
+					android:layout_weight="1"
+					
+					>
+				</CheckBox>
+				
+			</LinearLayout>
+		
+		</LinearLayout>
+    	
+    </ScrollView>
+    
+    <LinearLayout
+    	android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:gravity="bottom">
+		
+		<Button 
+			android:id="@+id/selectAllButton" 
+			android:text="Select All" 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="3">
+		</Button>
+		<Button 
+			android:id="@+id/selectNoneButton" 
+			android:text="Select None"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1">
+		</Button>
+	</LinearLayout>
+    <Button
+		android:id="@+id/commitRestoreButton" 
+		android:text="Restore Selected Contacts" 
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_weight="1">
+	</Button>
+</LinearLayout>

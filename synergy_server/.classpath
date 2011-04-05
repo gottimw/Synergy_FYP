@@ -4,6 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="D:/programing/java/projects/synergy_shared_classes.jar"/>
-	<classpathentry kind="lib" path="D:/JavaDB/lib/derby.jar"/>
+	<classpathentry kind="lib" path="D:/programowanie/java/Synergy_FYP/xom-1.2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Gottimw/Desktop/mysql-connector-java-5.1.15/mysql-connector-java-5.1.15/mysql-connector-java-5.1.15-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

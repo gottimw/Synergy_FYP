@@ -1,25 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
+
+<LinearLayout
+	android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-    <TextView 
-    	android:layout_height="wrap_content"
-    	android:id="@+id/logDumpDesc"
-    	android:text="Log Dump:"
-    	android:layout_width="wrap_content"
-    ></TextView>
-    <ScrollView 
-    	android:id="@+id/ScrollView01"
- 		android:layout_width="fill_parent"
-		android:layout_height="500px"
-	>    
-    <TextView 
-    	android:text="none so far"
-    	android:id="@+id/LogDump"
-    	android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    ></TextView>
-    </ScrollView>
+    android:gravity="center_horizontal">
+    <!-- Login -->
+    <TextView
+    		android:layout_width="wrap_content"
+    		android:text="Synergy Client"
+    		android:layout_height="wrap_content">
+    </TextView>
+    
+    <LinearLayout 
+    	android:layout_height="wrap_content" 
+    	android:id="@+id/loginTextView" 
+    	android:layout_width="match_parent"
+    	android:orientation="horizontal">
+    	
+    	<TextView
+    		android:layout_width="fill_parent"
+    		android:layout_height="fill_parent"
+    		android:text="Username:"
+    		android:layout_weight="1">
+    	</TextView>
+    	<TextView
+    		android:layout_width="fill_parent"
+    		android:layout_height="fill_parent"
+    		android:text="Password:"
+    		android:layout_weight="1">
+    	</TextView>
+   	</LinearLayout>
+    <LinearLayout 
+    	android:layout_height="wrap_content" 
+    	android:id="@+id/loginInputFields" 
+    	android:layout_width="match_parent"
+    	android:orientation="horizontal">
+    	
+    	<EditText 
+    		android:id="@+id/loginInput"
+    		android:layout_width="fill_parent"
+    		android:layout_height="fill_parent"
+    		android:layout_weight="1"
+    		android:text="root">
+    	
+    	</EditText>
+    	<EditText 
+    		android:id="@+id/passwordInput"
+    		android:layout_width="fill_parent"
+    		android:layout_height="fill_parent"
+    		android:layout_weight="1"
+    		android:password="true"
+    		android:text="root">
+    	
+    	</EditText>
+    	
+    </LinearLayout>
+	<!-- End of Login -->
+		
+	<!-- main buttons -->	
+	<Button 
+		android:text="Perform Backup" 
+		android:id="@+id/backupButton" 
+		android:layout_height="wrap_content" 
+		android:layout_weight="2" 
+		android:layout_width="match_parent" 
+		android:layout_marginBottom="10px"
+		android:layout_marginTop="10px">
+	</Button>
+	<Button 
+		android:layout_weight="1" 
+		android:layout_width="match_parent" 
+		android:id="@+id/restoreButton" 
+		android:text="Perform Restore" 
+		android:layout_height="wrap_content" 
+		android:layout_marginBottom="10px">
+		</Button>
+	<Button 
+		android:layout_weight="1" 
+		android:layout_width="match_parent" 
+		android:id="@+id/wipeButton" 
+		android:text="Wipe Synergy Device" 
+		android:layout_height="wrap_content" 
+		android:layout_marginBottom="10px">
+	</Button>
+	<Button 
+		android:layout_weight="1" 
+		android:layout_width="match_parent" 
+		android:id="@+id/serviceStartButton" 
+		android:text="Start Backup Routine" 
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="10px">
+	</Button>
+	<Button 
+		android:text="Stop Backup Routine" 
+		android:id="@+id/serviceStopButton" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
+
+		android:layout_weight="1">
+	</Button>
+	
+	<Button 
+		android:text="Exit" 
+		android:id="@+id/exitButton" 
+		android:layout_height="wrap_content"
+		android:layout_weight="1" 
+		android:layout_width="match_parent">
+	</Button>
+	
+	<!-- end of main -->
 </LinearLayout>
