@@ -32,7 +32,7 @@ public class ObjectReceiveControler {
 	
 	public ObjectReceiveControler(){
 		socketIp = "10.150.8.115";
-		socketPort = 10101;
+		socketPort = 10102;
 		setUpSocket();	
 	}
 	
@@ -99,10 +99,10 @@ public class ObjectReceiveControler {
 	
 	public void closeConnection(){
 		try {
-			is.close();
-			os.close();
-			oos.close();
-			ois.close();
+			//is.close();
+			//os.close();
+			//oos.close();
+			//ois.close();
 			clientSocket.close();
 		} catch (IOException e) {
 			e.printStackTrace();

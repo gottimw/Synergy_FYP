@@ -121,6 +121,24 @@ public class XML_constructor {
 		message.appendChild(elem);
 	}
 	
+	public void insertTagForBackup(String name, String phone, String email){
+		
+		Element contactE = new Element("Contact");
+		Element nameE = new Element("Name");
+		Element phoneE = new Element("Phone");
+		Element emailE = new Element("Email");
+		
+		nameE.appendChild(name);
+		phoneE.appendChild(phone);
+		emailE.appendChild(email);
+		
+		contactE.appendChild(nameE);
+		contactE.appendChild(phoneE);
+		contactE.appendChild(emailE);
+		
+		message.appendChild(contactE);
+	}
+	
 	/**
 	 * Method that inserts one tag into Synergy message tag
 	 * Additionally an attribute is added to tag as well

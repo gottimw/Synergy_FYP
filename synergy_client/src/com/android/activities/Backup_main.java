@@ -15,11 +15,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.Contacts;
 import android.provider.Contacts.People;
 import android.provider.ContactsContract;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class Backup_main extends Activity {
@@ -31,71 +35,92 @@ public class Backup_main extends Activity {
         setContentView(R.layout.backup_main);
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        
-        String user ="empty";
+
+		main();
+	}
+	
+	public void main(){
+		
+		String user ="empty";
         String pass ="empty";
-        
-        Bundle extras = getIntent().getExtras();
+		
+		Bundle extras = getIntent().getExtras();
         if(extras !=null)
         {
         	user = extras.getString("user");
         	pass = extras.getString("pass");
         }
+		
+		//access resources and send it to server
+		final Stack<String[]> contacts = getContacts();
+		Stack<String[]> contacts2 = (Stack<String[]>) contacts.clone();
+		int i = 0;
+		
+		while(! contacts2.empty()){
+			//draw oout all contacts
+			drawContactBox(contacts2.pop(), i);
+			i++;
+		}
         
-		main(user, pass);
-	}
-	
-	public void main(String user, String pass){
+        SynergyMessageReader msgReader= new SynergyMessageReader();
+
+		SynergyMessageCreator messageCreator = new SynergyMessageCreator(MessageType.HANDSHAKE);
+		messageCreator.createHandshakeMsg(user, pass);
+		String message = messageCreator.getReadyXML_Messsage();
+		
+		final ObjectReceiveControler socket_handler = new ObjectReceiveControler();
+		
+		socket_handler.sendObject((Object) message );
+		
+		String responce = (String) socket_handler.receiveObject();
+		Boolean loggedIn = msgReader.parseHandshake_Res(responce);
+					
+		//if login failed quit and inform used of error
+
+		if(!loggedIn){
+			Context context = getApplicationContext();
+			CharSequence text = "Login to server Failed\nWrong login or password";
+
+			Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+			toast.show();
+			//socket_handler.closeConnection();
+			Intent intent = new Intent();
+			setResult(RESULT_OK, intent);
+			finish();
+		}
 		
 		
-		
-		
-		
-		
-		
+		//create xml message with selected contacts
+		//final String messageBackup = createBackupContactsXML(contacts);	
+			
 		//button handling
 		Button next = (Button) findViewById(R.id.backupConfirmation);
 		next.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
+	
+				 Stack<String[]> contactsStack = (Stack<String[]>) contacts.clone();
+				 Stack<String[]> contactsForBackup = new Stack<String[]>();
 				
-				String user ="empty";
-		        String pass ="empty";
-		        
-		        Bundle extras = getIntent().getExtras();
-		        if(extras !=null)
-		        {
-		        	user = extras.getString("user");
-		        	pass = extras.getString("pass");
-		        }
+				 //select contacts that has a tick box checked
+				 LinearLayout ll = (LinearLayout) findViewById(R.id.contactsScrolableBox);	 
+				 for(int i=0; i< ll.getChildCount(); i++ ){
+					 
+					 CheckBox cb = (CheckBox) ll.getChildAt(i);
+					 
+					 if(cb.isChecked()){ 
+						 contactsForBackup.push(contactsStack.pop());
+					 }else{
+						 contactsStack.pop();
+					 }
+					 
+				 }
 				
-		        SynergyMessageReader msgReader= new SynergyMessageReader();
-		
-				SynergyMessageCreator messageCreator = new SynergyMessageCreator(MessageType.HANDSHAKE);
-				messageCreator.createHandshakeMsg(user, pass);
-				String message = messageCreator.getReadyXML_Messsage();
+				String msg = createBackupContactsXML(contactsForBackup);
+				 				
+				socket_handler.sendObject((Object) msg );
 				
-				ObjectReceiveControler socket_handler = new ObjectReceiveControler();
+			
 				
-				socket_handler.sendObject((Object) message );
-				
-				String responce = (String) socket_handler.receiveObject();
-				Boolean loggedIn = msgReader.parseHandshake_Res(responce);
-							
-				//if login failed quit and inform used of error
-
-				if(!loggedIn){
-					Context context = getApplicationContext();
-					CharSequence text = "Login to server Failed\nWrong login or password";
-
-					Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
-					toast.show();
-					socket_handler.closeConnection();
-				}
-				
-				//access resources and send it to server
-				getContacts();
-				
-
 				Intent intent = new Intent();
 				setResult(RESULT_OK, intent);
 				finish();
@@ -103,113 +128,114 @@ public class Backup_main extends Activity {
 
 		});
 		
+		Button all = (Button) findViewById(R.id.selectAll);
+		all.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				LinearLayout ll = (LinearLayout) findViewById(R.id.contactsScrolableBox);
+				
+				for(int i=0 ; i < ll.getChildCount(); i++){
+					( (CheckBox) ll.getChildAt(i)).setChecked(true);
+				}
+			
+			}
+
+		});
+		
+		Button none = (Button) findViewById(R.id.selectNone);
+		none.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View view) {
+				LinearLayout ll = (LinearLayout) findViewById(R.id.contactsScrolableBox);
+				
+				for(int i=0 ; i < ll.getChildCount(); i++){
+					( (CheckBox) ll.getChildAt(i)).setChecked(false);
+				}
+			
+			}
+
+		});
 		
 	}
 
-	public void getContacts(){
+	public String createBackupContactsXML(Stack<String[]> contacts){
+		
+		SynergyMessageCreator msgCreator = new SynergyMessageCreator(MessageType.BACKUP_CONTACTS);
+		msgCreator.createBackupContactsMsg(contacts);
+		return msgCreator.getReadyXML_Messsage();
+	}
+	
+	
+	public Stack<String[]> getContacts(){
 		
 		String name;
 		String id;
-		Stack<String> phoneStack = new Stack<String>();
-		Stack<String> emailStack = new Stack<String>();
+		String email;
+		String[] contact = new String[3];
 		
-		String[] contact = new String[5];
+		Stack<String> phoneStack = new Stack<String>();
+		Stack<String[]> contactsStack = new Stack<String[]>();
 		
 		ContentResolver contentRes = getContentResolver();
 		Cursor cursor = contentRes.query(ContactsContract.Contacts.CONTENT_URI,null,null,null,null);
 
+		Boolean phoneFound;
+		
 		if(cursor.getCount() > 0){
 			while(cursor.moveToNext()){
+				
+				phoneFound = false;
+				
 				id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
 				name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+				
+				contact[0] = name;
+				
 				if (Integer.parseInt(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
 					Cursor pCur = contentRes.query(
 				 		    ContactsContract.CommonDataKinds.Phone.CONTENT_URI, 
 				 		    null, 
 				 		    ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = ?", 
 				 		    new String[]{id}, null);
-				 	        while (pCur.moveToNext()) {
-				 		    // Do something with phones
-				 	        } 
-				 	        pCur.close();
+					while (pCur.moveToNext()) {
+						String phoneNumber = pCur.getString(pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+						contact[1] = phoneNumber;
+						phoneFound = true;
+					} 
+					pCur.close();
+								
+					Cursor emailCur = contentRes.query( 
+							ContactsContract.CommonDataKinds.Email.CONTENT_URI, 
+							null,
+							ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = ?", 
+							new String[]{id}, null); 
+					while (emailCur.moveToNext()) { 
+					    email = emailCur.getString(emailCur.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
+					    contact[2] = email;
+					    break;
+					} 
+					emailCur.close();
 					
+
+					contactsStack.push(contact);
 					
+					contact = new String[3];
+				
 				}
 			}
 		}
 		
+		return contactsStack;
+		
 	}
 	
-	public void onActivityResult(int requestCode, int resultCode, Intent intent) 
-	{
-
-	  if (requestCode == 0)
-	  {         
-	    getContactInfo(intent);         
-	    // Your class variables now have the data, so do something with it. 
-	  }
-	}//onActivityResult
-
-	protected void getContactInfo(Intent intent)
-	{
-		String name;
-		String contactId;
-		Stack<String> phoneStack = new Stack<String>();
-		Stack<String> emailStack = new Stack<String>();
+	public void drawContactBox(String[] cDetails, Integer id){
 		
-	   Cursor cursor =  managedQuery(intent.getData(), null, null, null, null);      
-	   while (cursor.moveToNext()) 
-	   {           
-	       contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-	       name = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME)); 
-
-	       String hasPhone = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
-
-	       if ( hasPhone.equalsIgnoreCase("1"))
-	           hasPhone = "true";
-	       else
-	           hasPhone = "false" ;
-
-	       if (Boolean.parseBoolean(hasPhone)) 
-	       {
-	        Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = "+ contactId,null, null);
-	        while (phones.moveToNext()) 
-	        {
-	          String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-	          phoneStack.push(phoneNumber);
-	        }
-	        phones.close();
-	       }
-
-	       // Find Email Addresses
-	       Cursor emails = getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI,null,ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + contactId,null, null);
-	       while (emails.moveToNext()) 
-	       {
-	        String emailAddress = emails.getString(emails.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
-	        emailStack.push(emailAddress);
-	       }
-	       emails.close();
-/*
-	    Cursor address = getContentResolver().query(
-	                ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_URI,
-	                null,
-	                ContactsContract.CommonDataKinds.StructuredPostal.CONTACT_ID + " = " + contactId,
-	                null, null);
-	    while (address.moveToNext()) 
-	    { 
-	      // These are all private class variables, don't forget to create them.
-	      poBox      = address.getString(address.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.POBOX));
-	      street     = address.getString(address.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.STREET));
-	      city       = address.getString(address.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.CITY));
-	      state      = address.getString(address.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.REGION));
-	      postalCode = address.getString(address.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.POSTCODE));
-	      country    = address.getString(address.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.COUNTRY));
-	      type       = address.getString(address.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.TYPE));
-	    }  //address.moveToNext()   
-	  }  //while (cursor.moveToNext())  
- */      
-	   cursor.close();
-	  }//getContactInfo
-
+		LinearLayout ll = (LinearLayout) findViewById(R.id.contactsScrolableBox);
+		
+		CheckBox cb = new CheckBox(this);
+		cb.setText(cDetails[0]);
+		cb.setId(id);
+		cb.setChecked(true);
+		ll.addView(cb);
+		
 	}
 }

@@ -58,5 +58,14 @@ public class JavaDB {
 		}
 	}
 	
-	
+	public void executeUpdate(String sqlQuery){
+		try {
+			stmt = con.createStatement();
+			stmt.executeUpdate(sqlQuery);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

@@ -3,6 +3,7 @@ package XML_handler;
 import db.JavaDB_SynergyWraper;
 import nu.xom.Document;
 import nu.xom.Element;
+import nu.xom.Node;
 
 public class SynergyMessageReader {
 
@@ -47,7 +48,29 @@ public class SynergyMessageReader {
 		
 	}
 	
-	
+	public void parseBackupContacts(String originalXML){
+		
+		setVariables(originalXML);
+		
+		Element message = (doc.getRootElement()).getFirstChildElement("SynergyMessage");
+		
+		for(int i = 0 ; i < message.getChildCount() ; i++){
+			
+			Node contact = message.getChild(i);
+			Node nameN = contact.getChild(0);
+			Node phoneN = contact.getChild(1);
+			Node emailN = contact.getChild(2);
+			
+			String name  = nameN.getValue();
+			String phone = phoneN.getValue();
+			String email = emailN.getValue();
+			
+			db_handler.addContactToDB(name, phone, email);
+		}
+		
+		
+		
+	}
 	
 	
 	

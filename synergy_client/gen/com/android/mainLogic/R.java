@@ -15,38 +15,28 @@ public final class R {
         public static final int synergy_ico=0x7f020001;
     }
     public static final class id {
-        public static final int LogDump=0x7f05001f;
-        public static final int ScrollView01=0x7f05001b;
-        public static final int backupButton=0x7f050015;
-        public static final int backupConfirmation=0x7f050010;
+        public static final int LogDump=0x7f050015;
+        public static final int ScrollView01=0x7f05000c;
+        public static final int backupButton=0x7f05000b;
+        public static final int backupConfirmation=0x7f050006;
         public static final int backup_main_selectContacts=0x7f050000;
-        public static final int commitRestoreButton=0x7f05001e;
-        public static final int contactDetails00=0x7f050004;
-        public static final int contactHolder00=0x7f050003;
+        public static final int commitRestoreButton=0x7f050014;
         public static final int contactsHolder=0x7f050001;
         public static final int contactsScrolableBox=0x7f050002;
-        public static final int createGroupText=0x7f05000b;
-        public static final int email00=0x7f050009;
-        public static final int exitButton=0x7f05001a;
-        public static final int groupName=0x7f05000c;
-        public static final int home00=0x7f050008;
-        public static final int loginInput=0x7f050013;
-        public static final int loginInputFields=0x7f050012;
-        public static final int loginTextView=0x7f050011;
-        public static final int mobile00=0x7f050007;
-        public static final int name00=0x7f050005;
-        public static final int passwordInput=0x7f050014;
-        public static final int restoreButton=0x7f050016;
-        public static final int selectAll=0x7f05000e;
-        public static final int selectAllButton=0x7f05001c;
-        public static final int selectBtnHolder=0x7f05000d;
-        public static final int selectNone=0x7f05000f;
-        public static final int selectNoneButton=0x7f05001d;
-        public static final int serviceStartButton=0x7f050018;
-        public static final int serviceStopButton=0x7f050019;
-        public static final int surname00=0x7f050006;
-        public static final int widget56=0x7f05000a;
-        public static final int wipeButton=0x7f050017;
+        public static final int email00=0x7f050011;
+        public static final int home00=0x7f050010;
+        public static final int loginInput=0x7f050009;
+        public static final int loginInputFields=0x7f050008;
+        public static final int loginTextView=0x7f050007;
+        public static final int mobile00=0x7f05000f;
+        public static final int name00=0x7f05000d;
+        public static final int passwordInput=0x7f05000a;
+        public static final int selectAll=0x7f050004;
+        public static final int selectAllButton=0x7f050012;
+        public static final int selectBtnHolder=0x7f050003;
+        public static final int selectNone=0x7f050005;
+        public static final int selectNoneButton=0x7f050013;
+        public static final int surname00=0x7f05000e;
     }
     public static final class layout {
         public static final int backup_main=0x7f030000;

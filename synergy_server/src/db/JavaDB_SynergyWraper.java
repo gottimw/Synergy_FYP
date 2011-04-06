@@ -43,4 +43,19 @@ public class JavaDB_SynergyWraper {
 		return false;			
 	}
 	
+	public void addContactToDB(String name, String phone, String email){
+		
+		String q = 
+			"INSERT INTO `synergy_db`.`contacts` " +
+				"(`deviceID`, `contactName`, `phoneNumber`, `email`)" +
+			" VALUES " +
+				"('root', '"+name+"', '"+phone+"', '"+email+"')" +
+			"ON DUPLICATE KEY UPDATE " +
+				"phoneNumber = '"+phone+"',"+
+				"email = '"+email+"'";
+		
+		javaDB.executeUpdate(q);
+		
+		System.out.println("Added: "+name +" "+ phone +" "+ email);
+	}
 }

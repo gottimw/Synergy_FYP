@@ -32,7 +32,7 @@ public class Main {
 			incomingMessage = null;
 			outgoingMessage = null;
 						
-			int port = 10101;
+			int port = 10102;
 			socketOpen = true;
 			
 			InetAddress thisIp = InetAddress.getLocalHost();
@@ -79,6 +79,10 @@ public class Main {
 					break;
 				}
 				
+				incomingMessage = (String) socket_handler.receiveObject();
+				msgReader = new SynergyMessageReader();
+				msgReader.parseBackupContacts(incomingMessage);
+				
 				socketOpen = false;
 			}
 			
@@ -89,6 +93,7 @@ public class Main {
 				e.printStackTrace();
 			}
 			socket_handler.teardownSocket();
+			System.out.println("Socket Closed No more commands for client");
 		}
 	}
 
