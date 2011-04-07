@@ -88,10 +88,6 @@ public class Backup_main extends Activity {
 			setResult(RESULT_OK, intent);
 			finish();
 		}
-		
-		
-		//create xml message with selected contacts
-		//final String messageBackup = createBackupContactsXML(contacts);	
 			
 		//button handling
 		Button next = (Button) findViewById(R.id.backupConfirmation);
@@ -111,16 +107,13 @@ public class Backup_main extends Activity {
 						 contactsForBackup.push(contactsStack.pop());
 					 }else{
 						 contactsStack.pop();
-					 }
-					 
+					 }					 
 				 }
 				
 				String msg = createBackupContactsXML(contactsForBackup);
 				 				
 				socket_handler.sendObject((Object) msg );
-				
-			
-				
+		
 				Intent intent = new Intent();
 				setResult(RESULT_OK, intent);
 				finish();
@@ -136,9 +129,7 @@ public class Backup_main extends Activity {
 				for(int i=0 ; i < ll.getChildCount(); i++){
 					( (CheckBox) ll.getChildAt(i)).setChecked(true);
 				}
-			
 			}
-
 		});
 		
 		Button none = (Button) findViewById(R.id.selectNone);
@@ -149,11 +140,8 @@ public class Backup_main extends Activity {
 				for(int i=0 ; i < ll.getChildCount(); i++){
 					( (CheckBox) ll.getChildAt(i)).setChecked(false);
 				}
-			
 			}
-
-		});
-		
+		});		
 	}
 
 	public String createBackupContactsXML(Stack<String[]> contacts){
@@ -212,13 +200,9 @@ public class Backup_main extends Activity {
 					    contact[2] = email;
 					    break;
 					} 
-					emailCur.close();
-					
-
-					contactsStack.push(contact);
-					
+					emailCur.close();				
+					contactsStack.push(contact);					
 					contact = new String[3];
-				
 				}
 			}
 		}
